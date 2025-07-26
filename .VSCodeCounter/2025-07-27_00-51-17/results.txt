@@ -1,0 +1,48 @@
+Date : 2025-07-27 00:51:17
+Directory : d:\DEMOS\CombatAIFramework\Assets\Scripts
+Total : 17 files,  699 codes, 33 comments, 114 blanks, all 846 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| C#       |         17 |        699 |         33 |        114 |        846 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                  | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                     |         17 |        699 |         33 |        114 |        846 |
+| AIPerception                                                                          |          2 |        159 |          6 |         20 |        185 |
+| AnimationNotifySignals                                                                |          2 |         56 |          3 |         10 |         69 |
+| BT                                                                                    |          4 |        186 |         11 |         31 |        228 |
+| BT\BTTask                                                                             |          4 |        186 |         11 |         31 |        228 |
+| DataAsset                                                                             |          5 |         70 |          0 |         13 |         83 |
+| FSM                                                                                   |          2 |        134 |         11 |         24 |        169 |
+| GAS                                                                                   |          2 |         94 |          2 |         16 |        112 |
++---------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                              | language | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| d:\DEMOS\CombatAIFramework\Assets\Scripts\AIPerception\AIStimulateSourceComp.cs       | C#       |         39 |          0 |          6 |         45 |
+| d:\DEMOS\CombatAIFramework\Assets\Scripts\AIPerception\AIVisionPerceptionComp.cs      | C#       |        120 |          6 |         14 |        140 |
+| d:\DEMOS\CombatAIFramework\Assets\Scripts\AnimationNotifySignals\ANSC_ANSContainer.cs | C#       |         47 |          3 |          8 |         58 |
+| d:\DEMOS\CombatAIFramework\Assets\Scripts\AnimationNotifySignals\ANS_ANSBase.cs       | C#       |          9 |          0 |          2 |         11 |
+| d:\DEMOS\CombatAIFramework\Assets\Scripts\BT\BTTask\BTT_CastAbility.cs                | C#       |         54 |          5 |          8 |         67 |
+| d:\DEMOS\CombatAIFramework\Assets\Scripts\BT\BTTask\BTT_DoMove.cs                     | C#       |         62 |          3 |          9 |         74 |
+| d:\DEMOS\CombatAIFramework\Assets\Scripts\BT\BTTask\BTT_PlayAnimationByName.cs        | C#       |         47 |          2 |          9 |         58 |
+| d:\DEMOS\CombatAIFramework\Assets\Scripts\BT\BTTask\BTT_SelectTarget.cs               | C#       |         23 |          1 |          5 |         29 |
+| d:\DEMOS\CombatAIFramework\Assets\Scripts\DataAsset\DAB_AIBTConfig.cs                 | C#       |         16 |          0 |          4 |         20 |
+| d:\DEMOS\CombatAIFramework\Assets\Scripts\DataAsset\DAB_AIPerceptionConfig.cs         | C#       |         14 |          0 |          2 |         16 |
+| d:\DEMOS\CombatAIFramework\Assets\Scripts\DataAsset\DAB_AnimTagConfig.cs              | C#       |         15 |          0 |          3 |         18 |
+| d:\DEMOS\CombatAIFramework\Assets\Scripts\DataAsset\DAB_EntityData.cs                 | C#       |         11 |          0 |          2 |         13 |
+| d:\DEMOS\CombatAIFramework\Assets\Scripts\DataAsset\DAB_LocomotionConfig.cs           | C#       |         14 |          0 |          2 |         16 |
+| d:\DEMOS\CombatAIFramework\Assets\Scripts\FSM\FSM_BasicFSM.cs                         | C#       |        100 |          2 |         14 |        116 |
+| d:\DEMOS\CombatAIFramework\Assets\Scripts\FSM\ST_BasicState.cs                        | C#       |         34 |          9 |         10 |         53 |
+| d:\DEMOS\CombatAIFramework\Assets\Scripts\GAS\GAS_GameAbilitySet.cs                   | C#       |         57 |          1 |          8 |         66 |
+| d:\DEMOS\CombatAIFramework\Assets\Scripts\GAS\GA_ConditionedAbilityBase.cs            | C#       |         37 |          1 |          8 |         46 |
+| Total                                                                                 |          |        699 |         33 |        114 |        846 |
++---------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
