@@ -9,9 +9,11 @@ public class GAS_GameAbilitySet : MonoBehaviour
     {
         NotRunning,
         Running,
+        Interrupted,
         End
     }
-    [Serializable] public struct Ability
+    [Serializable]
+    public struct Ability
     {
         public string abilityName;
         public GA_ConditionedAbilityBase conditionedAbilityBase;
@@ -41,6 +43,13 @@ public class GAS_GameAbilitySet : MonoBehaviour
             StartCoroutine(CooldownCoroutine(abilityDictionary[abilityName]));
             abilityRunningState = AbilityRunningState.End;
         }
+    }
+
+    public void InterruptAbility(string abilityName)
+    {
+        abilityDictionary[abilityName].onInterrupt?.Invoke(this);
+        StartCoroutine(CooldownCoroutine(abilityDictionary[abilityName]));
+        abilityRunningState = AbilityRunningState.Interrupted;
     }
 
     private IEnumerator CooldownCoroutine(GA_ConditionedAbilityBase ability)

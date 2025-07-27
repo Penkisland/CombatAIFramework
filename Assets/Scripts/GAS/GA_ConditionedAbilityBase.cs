@@ -24,6 +24,7 @@ public class GA_ConditionedAbilityBase : ScriptableObject
     // Method to activate the ability
     public Action<GAS_GameAbilitySet> onActivate;
     public Action<GAS_GameAbilitySet> onDeactivate;
+    public Action<GAS_GameAbilitySet> onInterrupt;
 
     void OnEnable()
     {
@@ -40,6 +41,12 @@ public class GA_ConditionedAbilityBase : ScriptableObject
         {
             isActive = false;
             Debug.Log($"{abilityName} deactivated.");
+        };
+
+        onInterrupt += (abilitySet) =>
+        {
+            isActive = false;
+            Debug.Log($"{abilityName} interrupted and cooling down.");
         };
     }
 }
