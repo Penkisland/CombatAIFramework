@@ -9,4 +9,5 @@ public class DAB_EntityData : ScriptableObject
     public DAB_LocomotionConfig locomotionConfig;
     public DAB_AnimTagConfig animTagConfig;
     public DAB_AIPerceptionConfig aiPerceptionConfig;
+    public DAB_BasicAttributes basicAttributes;
 }

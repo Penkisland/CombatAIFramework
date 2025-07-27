@@ -12,7 +12,7 @@ public class DAB_AIBTConfig : ScriptableObject
     public struct AIBTMap
     {
         public string name;
-        public BehaviorTree behaviorTree;
+        public ExternalBehaviorTree behaviorTree;
     }
 
     public List<AIBTMap> aiBTMaps = new List<AIBTMap>();
