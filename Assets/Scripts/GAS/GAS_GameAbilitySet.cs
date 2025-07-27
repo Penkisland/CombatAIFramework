@@ -58,7 +58,7 @@ public class GAS_GameAbilitySet : MonoBehaviour
         {
             if (!abilityDictionary.ContainsKey(ability.abilityName))
             {
-                abilityDictionary.Add(ability.abilityName, ability.conditionedAbilityBase);
+                abilityDictionary.Add(ability.abilityName, Instantiate(ability.conditionedAbilityBase));
             }
         }
     }

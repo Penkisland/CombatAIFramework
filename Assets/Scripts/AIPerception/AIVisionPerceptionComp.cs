@@ -122,6 +122,18 @@ public class AIVisionPerceptionComp : MonoBehaviour
         }
     }
 
+    public List<Transform> GetLostTargets()
+    {
+        List<Transform> lostTargets = new List<Transform>();
+        foreach (var target in detectedTargets)
+        {
+            if (!IsTargetInSight(target))
+            {
+                lostTargets.Add(target);
+            }
+        }
+        return lostTargets;
+    }
     bool IsTargetInSight(Transform target)
     {
         Vector3 directionToTarget = (target.position - transform.position).normalized;

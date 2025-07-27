@@ -38,20 +38,18 @@ public class ANSC_ANSContainer : MonoBehaviour
         ansDictionary.Clear();
     }
 
-    public void OnAnimationNotifySignal(string signalNames)
+    public void OnAnimationNotifySignal(string param)
     {
-        string[] signals = signalNames.Split(',');
-        foreach (var signal in signals)
+        string[] parameters = param.Split(',');
+        string name = parameters[0];
+        string[] args = parameters.Length > 1 ? parameters[1..] : null;
+        if (ansDictionary.TryGetValue(name, out ANS_ANSBase ansBase))
         {
-            if (ansDictionary.TryGetValue(signal.Trim(), out ANS_ANSBase ansBase))
-            {
-                ansBase.OnAnimationNotifySignal?.Invoke(this);
-            }
-            else
-            {
-                Debug.LogWarning($"Signal '{signal}' not found in the dictionary.");
-            }
+            ansBase.OnAnimationNotifySignal?.Invoke(this, args);
+        }
+        else
+        {
+            Debug.LogWarning($"No ANS_ANSBase found for signal name '{name}'.");
         }
     }
-
 }
