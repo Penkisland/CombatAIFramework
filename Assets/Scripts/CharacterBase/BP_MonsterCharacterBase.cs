@@ -18,6 +18,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(ANSC_ANSContainer))]
 [RequireComponent(typeof(GAS_GameAbilitySet))]
 [RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(LMS_BasicLocomotion))]
 public class BP_MonsterCharacterBase : MonoBehaviour
 {
     public DAB_EntityData entityData;
