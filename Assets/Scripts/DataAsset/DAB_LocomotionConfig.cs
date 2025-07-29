@@ -13,4 +13,8 @@ public class DAB_LocomotionConfig : ScriptableObject
     public float gravity = -9.81f;
     public float groundCheckDistance = 0.1f;
     public LayerMask groundLayer;
+
+    [Header("Animation Settings")]
+    public float walkingThreshold = 0.1f;
+    public float runningThreshold = 0.5f;
 }

@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc14f9fd685905d41899dfcbf5d9618b, type: 3}
   m_Name: ST_MC_Idle
   m_EditorClassIdentifier: 
-  stateName: 
-  conditions: []
-  flows: []
+  stateName: Idle
+  conditions:
+  - Walk
+  flows:
+  - {fileID: 11400000, guid: b6c500c192cff394b902604f8d9120d2, type: 2}

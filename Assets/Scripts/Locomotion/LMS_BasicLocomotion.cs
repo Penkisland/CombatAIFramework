@@ -112,7 +112,7 @@ public class LMS_BasicLocomotion : MonoBehaviour
                         // float angle = Vector3.SignedAngle(transform.forward, mainCamera.transform.forward, Vector3.up);
                         // animator.SetFloat("Direction", angle / 180f); // Normalize to [-1, 1]
                         // apply speed factor to animation
-                        animator.SetFloat("SpeedFactor", curSpeed / locomotionConfig.walkSpeed);
+                        animator.SetFloat("SpeedFactor", locomotionConfig.walkSpeed / locomotionConfig.walkingThreshold);
                     }
                     break;
                 case LocomotionState.Running:
@@ -131,7 +131,7 @@ public class LMS_BasicLocomotion : MonoBehaviour
                         // float angle = Vector3.SignedAngle(transform.forward, mainCamera.transform.forward, Vector3.up);
                         // animator.SetFloat("Direction", angle / 180f); // Normalize to [-1, 1]
                         // apply speed factor to animation
-                        animator.SetFloat("SpeedFactor", curSpeed / locomotionConfig.runSpeed);
+                        animator.SetFloat("SpeedFactor", locomotionConfig.runSpeed / locomotionConfig.runningThreshold);
                     }
                     break;
                 case LocomotionState.Jumping:
@@ -166,7 +166,7 @@ public class LMS_BasicLocomotion : MonoBehaviour
                         animator.SetFloat("Speed", locomotionConfig.walkSpeed);
                         float angle = Mathf.Atan2(navMeshAgent.desiredVelocity.x, navMeshAgent.desiredVelocity.z) * Mathf.Rad2Deg;
                         animator.SetFloat("Direction", angle / 180f); // Normalize to [-1, 1]
-                        animator.SetFloat("SpeedFactor", curSpeed / locomotionConfig.walkSpeed);
+                        animator.SetFloat("SpeedFactor", locomotionConfig.walkSpeed / locomotionConfig.walkingThreshold);
                     }
                     break;
                 case LocomotionState.Running:
@@ -177,7 +177,7 @@ public class LMS_BasicLocomotion : MonoBehaviour
                         animator.SetFloat("Speed", locomotionConfig.runSpeed);
                         float angle = Mathf.Atan2(navMeshAgent.desiredVelocity.x, navMeshAgent.desiredVelocity.z) * Mathf.Rad2Deg;
                         animator.SetFloat("Direction", angle / 180f); // Normalize to [-1, 1]
-                        animator.SetFloat("SpeedFactor", curSpeed / locomotionConfig.runSpeed);
+                        animator.SetFloat("SpeedFactor", locomotionConfig.runSpeed / locomotionConfig.runningThreshold);
                     }
                     break;
                 case LocomotionState.Jumping:
