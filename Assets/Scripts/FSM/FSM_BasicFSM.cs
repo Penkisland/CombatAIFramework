@@ -7,7 +7,7 @@ public class FSM_BasicFSM : MonoBehaviour
 {
     public float timerInterval = 1.0f; // Default interval for the timer
 
-    private ST_BasicState currentState;
+    public ST_BasicState currentState;
     private Coroutine timerCoroutine;
     public List<ST_BasicState> states = new List<ST_BasicState>();
     public Action<FSM_BasicFSM> onTimer;
@@ -33,7 +33,6 @@ public class FSM_BasicFSM : MonoBehaviour
     {
         currentState?.onUpdate?.Invoke(this);
         currentState?.onCheckConditions?.Invoke(this);
-        CheckTransition();
     }
 
     void OnDestroy()
@@ -48,7 +47,15 @@ public class FSM_BasicFSM : MonoBehaviour
         {
             if (!stateMap.ContainsKey(state.stateName))
             {
-                stateMap.Add(state.stateName, state);
+                // Instantiate the state to ensure it's a unique instance
+                ST_BasicState instantiatedState = Instantiate(state);
+                // convert instance to derived type
+                instantiatedState.stateName = state.stateName;
+                instantiatedState.transitions = new List<ST_BasicState.ConditionTransition>(state.transitions);
+                instantiatedState.conditions = new List<string>(state.conditions);
+                instantiatedState.flows = new List<ST_BasicState>(state.flows);
+
+                stateMap.Add(state.stateName, instantiatedState);
             }
         }
     }
@@ -58,20 +65,9 @@ public class FSM_BasicFSM : MonoBehaviour
         stateMap.Clear();
     }
 
-    private void CheckTransition()
-    {
-        foreach (var transition in currentState.transitions)
-        {
-            if (currentState.conditionMap.TryGetValue(transition.conditionName, out bool conditionMet) && conditionMet)
-            {
-                GoToState(transition.nextState.stateName);
-                break;
-            }
-        }
-    }
-
     public void GoToState(string stateName)
     {
+        Debug.Log($"Transitioning from {currentState.stateName} to {stateName}");
         ST_BasicState nextState = stateMap[stateName];
         if (nextState != null)
         {

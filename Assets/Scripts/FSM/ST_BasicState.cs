@@ -48,5 +48,31 @@ public class ST_BasicState : ScriptableObject
                 conditionMap.Add(condition, false);
             }
         }
+
+        onUpdate = (fsm) =>
+        {
+        };
+
+        onExit = (fsm) =>
+        {
+            // Reset conditions on exit
+            foreach (var condition in conditions)
+            {
+                conditionMap[condition] = false;
+            }
+        };
+
+        onCheckConditions = (fsm) =>
+        {
+            // Default implementation does nothing, can be overridden in derived states
+            
+            foreach (var condition in conditions)
+            {
+                if (conditionMap.TryGetValue(condition, out bool isConditionMet) && isConditionMet)
+                {
+                    fsm.GoToState(condition);
+                }
+            }
+        };
     }
 }

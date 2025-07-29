@@ -68,7 +68,6 @@ public class LMS_BasicLocomotion : MonoBehaviour
         Vector3 moveDirection = cameraForward * Input.GetAxis("Vertical") + cameraRight * Input.GetAxis("Horizontal");
         moveDirection.Normalize();
 
-        moveDirection = transform.InverseTransformVector(moveDirection); // Convert to local space
         return moveDirection;
     }
 
@@ -77,7 +76,7 @@ public class LMS_BasicLocomotion : MonoBehaviour
         switch (movementHandleCompType)
         {
             case MovementHandleCompType.Animator:
-                animator.applyRootMotion = true;
+                animator.ApplyBuiltinRootMotion();
                 break;
             case MovementHandleCompType.NavMeshAgent:
                 HandleNavMeshAgentMovement();
@@ -95,28 +94,44 @@ public class LMS_BasicLocomotion : MonoBehaviour
             switch (locomotionState)
             {
                 case LocomotionState.Idle:
-                    characterController.Move(Vector3.zero);
+                    animator.SetFloat("Speed", 0);
                     break;
                 case LocomotionState.Walking:
-                curSpeed = Mathf.Lerp(curSpeed, locomotionConfig.walkSpeed, Time.deltaTime * acceleration);
-                    characterController.SimpleMove(curSpeed * Time.deltaTime * dir);
+                    curSpeed = Mathf.Lerp(curSpeed, locomotionConfig.walkSpeed, Time.deltaTime * acceleration);
+                    characterController.Move(curSpeed * Time.deltaTime * dir);
+                    // rotate the character to face the movement direction
+                    if (dir != Vector3.zero)
+                    {
+                        Quaternion targetRotation = Quaternion.LookRotation(dir);
+                        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * locomotionConfig.rotationSpeed);
+                    }
                     if (animator != null)
                     {
                         animator.SetFloat("Speed", curSpeed);
                         // calculate the angle between the character's forward direction and the camera's forward direction
-                        float angle = Vector3.SignedAngle(transform.forward, mainCamera.transform.forward, Vector3.up);
-                        animator.SetFloat("Direction", angle / 180f); // Normalize to [-1, 1]
+                        // float angle = Vector3.SignedAngle(transform.forward, mainCamera.transform.forward, Vector3.up);
+                        // animator.SetFloat("Direction", angle / 180f); // Normalize to [-1, 1]
+                        // apply speed factor to animation
+                        animator.SetFloat("SpeedFactor", curSpeed / locomotionConfig.walkSpeed);
                     }
                     break;
                 case LocomotionState.Running:
                     curSpeed = Mathf.Lerp(curSpeed, locomotionConfig.runSpeed, Time.deltaTime * acceleration);
-                    characterController.SimpleMove(curSpeed * Time.deltaTime * dir);
+                    characterController.Move(curSpeed * Time.deltaTime * dir);
+                    // rotate the character to face the movement direction
+                    if (dir != Vector3.zero)
+                    {
+                        Quaternion targetRotation = Quaternion.LookRotation(dir);
+                        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * locomotionConfig.rotationSpeed);
+                    }
                     if (animator != null)
                     {
                         animator.SetFloat("Speed", curSpeed);
                         // calculate the angle between the character's forward direction and the camera's forward direction
-                        float angle = Vector3.SignedAngle(transform.forward, mainCamera.transform.forward, Vector3.up);
-                        animator.SetFloat("Direction", angle / 180f); // Normalize to [-1, 1]
+                        // float angle = Vector3.SignedAngle(transform.forward, mainCamera.transform.forward, Vector3.up);
+                        // animator.SetFloat("Direction", angle / 180f); // Normalize to [-1, 1]
+                        // apply speed factor to animation
+                        animator.SetFloat("SpeedFactor", curSpeed / locomotionConfig.runSpeed);
                     }
                     break;
                 case LocomotionState.Jumping:
@@ -141,6 +156,7 @@ public class LMS_BasicLocomotion : MonoBehaviour
             {
                 case LocomotionState.Idle:
                     navMeshAgent.velocity = Vector3.zero;
+                    animator.SetFloat("Speed", 0);
                     break;
                 case LocomotionState.Walking:
                     curSpeed = Mathf.Lerp(curSpeed, locomotionConfig.walkSpeed, Time.deltaTime * acceleration);
@@ -150,6 +166,7 @@ public class LMS_BasicLocomotion : MonoBehaviour
                         animator.SetFloat("Speed", locomotionConfig.walkSpeed);
                         float angle = Mathf.Atan2(navMeshAgent.desiredVelocity.x, navMeshAgent.desiredVelocity.z) * Mathf.Rad2Deg;
                         animator.SetFloat("Direction", angle / 180f); // Normalize to [-1, 1]
+                        animator.SetFloat("SpeedFactor", curSpeed / locomotionConfig.walkSpeed);
                     }
                     break;
                 case LocomotionState.Running:
@@ -160,6 +177,7 @@ public class LMS_BasicLocomotion : MonoBehaviour
                         animator.SetFloat("Speed", locomotionConfig.runSpeed);
                         float angle = Mathf.Atan2(navMeshAgent.desiredVelocity.x, navMeshAgent.desiredVelocity.z) * Mathf.Rad2Deg;
                         animator.SetFloat("Direction", angle / 180f); // Normalize to [-1, 1]
+                        animator.SetFloat("SpeedFactor", curSpeed / locomotionConfig.runSpeed);
                     }
                     break;
                 case LocomotionState.Jumping:
@@ -174,5 +192,10 @@ public class LMS_BasicLocomotion : MonoBehaviour
         {
             Debug.LogError("NavMeshAgent component not found on the GameObject.");
         }
+    }
+
+    public void SetLocomotionState(LocomotionState newState)
+    {
+        locomotionState = newState;
     }
 }
